@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	f "forum/back/func"
 	q "forum/back/func/queries"
 	"net/http"
@@ -15,6 +14,8 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 	var data q.VP_data
 	tmpl := template.Must(template.ParseGlob("./front/tmpl/viewpost.html"))
 	var err error
+	var action string
+	var args []interface{}
 
 	//Rate limite
 
@@ -67,109 +68,39 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	//Gestion des likes et dislikes sur les postes et les commentaires
+
 	if r.Method == http.MethodGet {
-
-		switch {
-		// Gestion des likes/dislikes des postes
-		case r.FormValue("p_like") == "true":
-			// Pour un like en état 0
-			err = f.Like("posts", "like_post", "post_id", data.Post.ID, user_id)
-		case r.FormValue("p_dislike") == "true":
-			// Pour un dislike en état 0
-			err = f.Dislike("posts", "like_post", "post_id", data.Post.ID, user_id)
-
-		case r.FormValue("p_unlike") == "true":
-			//Si l'utilisateur reclique sur Like après l'avoir liker en état 1
-			err = f.Unlike("posts", "like_post", "post_id", data.Post.ID, user_id)
-
-		case r.FormValue("p_change_to_dislike") == "true":
-			//Si l'utilisateur clique sur dislike après avoir cliquer sur like
-			err = f.Unlike("posts", "like_post", "post_id", data.Post.ID, user_id)
-			if err != nil {
-				Error(w, r, err, "Problème Unlike", http.StatusInternalServerError)
-			}
-			err = f.Dislike("posts", "like_post", "post_id", data.Post.ID, user_id)
-
-		case r.FormValue("p_change_to_like") == "true":
-			//Si l'utilisateur clique sur like après avoir cliquer sur dislike
-			err = f.Undislike("posts", "like_post", "post_id", data.Post.ID, user_id)
-			if err != nil {
-				Error(w, r, err, "Problème Unlike", http.StatusInternalServerError)
-			}
-			err = f.Like("posts", "like_post", "post_id", data.Post.ID, user_id)
-
-		case r.FormValue("p_undislike") == "true":
-			//Si l'utilisateur reclique sur disLike après l'avoir disliker
-			err = f.Undislike("posts", "like_post", "post_id", data.Post.ID, user_id)
-
-			//Gestion des likes/dislikes des commentaires -----------------------------------------------------------------
-
-		case r.FormValue("com_like") == "true":
-			// Pour un like en état 0
+		if r.FormValue("post_action")!=""{
+			action = r.FormValue("post_action")
+			args = append(args,"posts", "like_post", "post_id", data.Post.ID, user_id)
+		}else if r.FormValue("comment_action")!=""{
+			action = r.FormValue("comment_action")
 			com_id, err3 := strconv.Atoi(r.FormValue("Comment_id"))
 			if err3 != nil {
-				fmt.Println("Problème Atoi com_id")
+				Error(w, r, err, "Problème Atoi comment_id", http.StatusInternalServerError)
 			}
-			err = f.Like("comments", "like_comment", "comment_id", com_id, user_id)
-
-		case r.FormValue("com_dislike") == "true":
-			// Pour un dislike en état 0
-			com_id, err3 := strconv.Atoi(r.FormValue("Comment_id"))
-			if err3 != nil {
-				fmt.Println("Problème Atoi com_id")
-			}
-
-			err = f.Dislike("comments", "like_comment", "comment_id", com_id, user_id)
-
-		case r.FormValue("com_unlike") == "true":
-			//Si l'utilisateur reclique sur Like après l'avoir liker en état 1
-			com_id, err3 := strconv.Atoi(r.FormValue("Comment_id"))
-			if err3 != nil {
-				fmt.Println("Problème Atoi com_id")
-			}
-
-			err = f.Unlike("comments", "like_comment", "comment_id", com_id, user_id)
-
-		case r.FormValue("com_change_to_dislike") == "true":
-			//Si l'utilisateur clique sur dislike après avoir cliquer sur like
-			com_id, err3 := strconv.Atoi(r.FormValue("Comment_id"))
-			if err3 != nil {
-				fmt.Println("Problème Atoi com_id")
-			}
-
-			err = f.Unlike("comments", "like_comment", "comment_id", com_id, user_id)
-			if err != nil {
-				Error(w, r, err, "Problème Unlike", http.StatusInternalServerError)
-			}
-			err = f.Dislike("comments", "like_comment", "comment_id", com_id, user_id)
-
-		case r.FormValue("com_change_to_like") == "true":
-			//Si l'utilisateur clique sur like après avoir cliquer sur dislike
-			com_id, err3 := strconv.Atoi(r.FormValue("Comment_id"))
-			if err3 != nil {
-				fmt.Println("Problème Atoi com_id")
-			}
-
-			err = f.Undislike("comments", "like_comment", "comment_id", com_id, user_id)
-			if err != nil {
-				Error(w, r, err, "Problème Unlike", http.StatusInternalServerError)
-			}
-			err = f.Like("comments", "like_comment", "comment_id", com_id, user_id)
-
-		case r.FormValue("com_undislike") == "true":
-			//Si l'utilisateur reclique sur disLike après l'avoir disliker
-			com_id, err3 := strconv.Atoi(r.FormValue("Comment_id"))
-			if err3 != nil {
-				fmt.Println("Problème Atoi com_id")
-			}
-
-			err = f.Undislike("comments", "like_comment", "comment_id", com_id, user_id)
-
+			args = append(args, "comments", "like_comment", "comment_id", com_id, user_id)
 		}
-		if err != nil {
-			Error(w, r, err, "Problème like/dislike", http.StatusInternalServerError)
+
+		switch action {
+		case "like" :
+			f.Like(args)
+		case "dislike" :
+			f.Dislike(args)
+		case "unlike" :
+			f.Unlike(args)
+		case "undislike":
+			f.Undislike(args)
+		case "change_to_like" :
+			f.Undislike(args)
+			f.Like(args)
+		case "change_to_dislike" :
+			f.Unlike(args)
+			f.Dislike(args)
 		}
 	}
+
 
 	//Récupération des données du post
 	data.Post, err = q.GetPostByID(data.Post.ID)

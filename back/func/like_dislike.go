@@ -5,7 +5,19 @@ import (
 	q "forum/back/func/queries"
 )
 
-func Like(table1 string, table2 string, col_type string, col_id int, user_id int) error {
+func Convert_args(args []interface{})(string, string, string, int, int){
+	table1, _ := args[0].(string)
+	table2, _ := args[1].(string)
+	col_type, _ := args[2].(string)
+	col_id, _ := args[3].(int)
+	user_id, _ := args[4].(int)
+	
+	return table1, table2, col_type, col_id, user_id
+}
+
+func Like(args []interface{}) error {
+	table1, table2, col_type, col_id, user_id := Convert_args(args)
+
 	err := q.UpdateNbLike(table1, col_type, col_id, "likes", 1)
 
 	if err != nil {
@@ -19,7 +31,9 @@ func Like(table1 string, table2 string, col_type string, col_id int, user_id int
 	return nil
 }
 
-func Dislike(table1 string, table2 string, col_type string, col_id int, user_id int) error {
+func Dislike(args []interface{}) error {
+
+	table1, table2, col_type, col_id, user_id := Convert_args(args)
 	err := q.UpdateNbLike(table1, col_type, col_id, "dislikes", 1)
 	if err != nil {
 		return err
@@ -31,7 +45,8 @@ func Dislike(table1 string, table2 string, col_type string, col_id int, user_id 
 	return nil
 }
 
-func Unlike(table1 string, table2 string, col_type string, col_id int, user_id int) error {
+func Unlike(args []interface{}) error {
+	table1, table2, col_type, col_id, user_id := Convert_args(args)
 	err := q.UpdateNbLike(table1, col_type, col_id, "likes", -1)
 	if err != nil {
 		return err
@@ -44,7 +59,9 @@ func Unlike(table1 string, table2 string, col_type string, col_id int, user_id i
 	return nil
 }
 
-func Undislike(table1 string, table2 string, col_type string, col_id int, user_id int) error {
+func Undislike(args []interface{}) error {
+	table1, table2, col_type, col_id, user_id := Convert_args(args)
+
 	err := q.UpdateNbLike(table1, col_type, col_id, "dislikes", -1)
 	if err != nil {
 		return nil
