@@ -141,9 +141,9 @@ func QueryTabPosts(query string, args []interface{}) ([]Post, error) {
 	return res, nil
 }
 
-func QueryVPpost(query string, args []interface{}) (VP_post, error) {
+func QueryVPpost(query string, args []interface{}) (Post, error) {
 
-	var post VP_post
+	var post Post
 
 	db, err := GetDatabase()
 	if err != nil {

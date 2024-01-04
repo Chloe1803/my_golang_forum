@@ -145,7 +145,7 @@ func buildPlaceholders(count int) string {
 	return strings.Join(placeholders, ", ")
 }
 
-func GetPostByID(post_id int) (VP_post, error) {
+func GetPostByID(post_id int) (Post, error) {
 
 	var args []interface{}
 	args = append(args, post_id)

@@ -179,9 +179,9 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Vérifie le status des likes
-	data.Post.Like_status, err = q.CheckLike("post_id", data.Post.ID, user_id, "like_post")
+	data.Like_status, err = q.CheckLike("post_id", data.Post.ID, user_id, "like_post")
 	if err != nil {
-		data.Post.Like_status = 0
+		data.Like_status = 0
 	}
 
 	//Récupère les commentaires du post

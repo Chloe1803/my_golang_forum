@@ -34,25 +34,11 @@ type Category struct {
 
 type VP_data struct {
 	Connected bool
-	Post      VP_post
+	Post      Post
 	Comments  []Comment
-}
-
-type VP_post struct {
-	ID             int
-	Title          string
-	Author         string
-	Timestamp      time.Time
-	Content        string
-	ImageAvailable bool
-	ImageURL       string
-	ImageType      string
-	Categories     []Category
-	Nb_like        int
-	Nb_dislike     int
-	Nb_comments    int
 	Like_status    int
 }
+
 
 type Comment struct {
 	Connected   bool

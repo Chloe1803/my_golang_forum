@@ -81,7 +81,7 @@
 
             {{if .Connected}}
             <!-- Si l'utilisateur est connecté 3 cas possible en fonction de like status -->
-            {{if eq $p.Like_status 0 }}
+            {{if eq .Like_status 0 }}
             <!-- Si l'utilisateur n'a rien liker/disliker -->
             <div class="container-fluid post_footer">
                 <form action="/view_post" method="GET">
@@ -106,7 +106,7 @@
                 </div> 
             </div>
 
-            {{else if eq $p.Like_status 1}}
+            {{else if eq .Like_status 1}}
 
             <!-- Si l'utilisatueur à liker -->
 
