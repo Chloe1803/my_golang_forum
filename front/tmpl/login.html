@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Forum du Jardinier - Se Connecter</title>
+
+    <!--CSS links-->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header class="container-fluid sticky-top">
+        <a href="/">
+            <H1 class="display-3">Le Forum du Jardinier</H1>
+        </a>
+    </header>
+    
+    <div class="container log">
+        <!-- Formulaire de connection classique -->
+        <form action="/login" method="post" >
+            <div class="Login_tilte">Se connecter</div>
+            <!-- Message d'erreur si info incorrect -->
+            {{ if .ErrorMessage}}
+            <div class="container text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3">
+                Email ou mot de passe incorrect
+            </div>
+            {{end}}
+
+            <label for="email" class="labelpwun">Email :</lable>
+            <input type="text" name="email" id="email" class="textarea" required>
+            <label for="password" class="labelpwun">Mot de passe :</label>
+            <input type="password" name="password" id="password" class="textarea" required>
+            <button class="btn btn-primary center-button" type="submit">Se connecter</button>
+        </form>
+        <!-- Séparateur visuel -->
+        <div class="separator-line"></div>
+
+        <!-- Boutton pour se connecter avec Google -->
+        <a href="#" onclick="redirectWithUserData('http://localhost:8080/loginwithgoogle')">
+        <button class="btn btn-light btn-lg btn-con center-button">
+            <img src="/css/node_modules/bootstrap-icons/icons/google.svg"> 
+            Se connecter avec Google
+        </button>
+        </a>
+        <!-- Boutton pour se connecter avec Github -->
+        <a href="#" onclick="redirectWithUserData('http://localhost:8080/loginwithgithub')">
+            <button class="btn btn-light btn-lg btn-con center-button">
+                <img src="/css/node_modules/bootstrap-icons/icons/github.svg"> 
+                Se connecter avec Github
+            </button>
+        </a>
+
+        <!-- Séparateur visuel -->
+        <div class="separator-line"></div>
+
+        <!-- Lien vers la page register -->
+        <p>Pas encore de compte ?</p>
+
+        
+        <a href="/register" class="btn btn-primary center-button" tabindex="-1" role="button" aria-disabled="true">
+            S'inscrire
+        </a>
+        
+
+    </div>
+
+    <script src="/scripts/bootstrap.js"></script>
+    <script>
+        function redirectWithUserData(url) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Construct the URL with parameters
+            const redirectURL = `${url}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+            
+            // Redirect to the new URL
+            window.location.href = redirectURL;
+        }
+    </script>
+
+</body>
+</html>

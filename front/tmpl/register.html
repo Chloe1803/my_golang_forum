@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Forum du Jardinier - Se Connecter</title>
+
+    <!--CSS links-->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="container-fluid sticky-top">
+        <a href="/">
+            <H1 class="display-3">Le Forum du Jardinier</H1>
+        </a>
+    </header>
+
+    <div class="container log">
+        <div class="Login_tilte">S'inscrire</div>
+
+        <!-- Message d'erreur si email ou user déjà dans la base -->
+        {{ if .ErrorMessage }}
+            <div class="container text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3">
+                <strong>Attention!</strong> L'email ou le nom d'utilisateur est déjà utilisé.
+            </div>
+        {{ end }}
+
+        <!-- Formulaire d'inscription -->
+        <form action="/register" method="post" >
+
+            <label for="username" class="labelpwun">Nom d'utilisateur :</label>
+            <input type="text" name="username" id ="username" class="textarea" required>
+            
+            <label for="email" class="labelpwun">Email :</lable>
+            <input type="text" name="email" id="email" class="textarea" required>
+            
+            <label for="password" class="labelpwun">Mot de passe :</label>
+            <input type="password" name="password" id="password" class="textarea" required>
+            
+            <button class="btn btn-primary center-button" type="submit">S'inscrire</button>
+        </form>
+
+    </div>               
+</body>
+</html>

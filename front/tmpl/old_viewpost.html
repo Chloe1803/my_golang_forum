@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Forum du Jardinier</title>
+      <!--CSS links-->
+      <link rel="stylesheet" href="../static/css/bootstrap.css">
+      <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="container-fluid sticky-top">
+        <a href="/">
+            <H1 class="display-3">Le Forum du Jardinier</H1>
+        </a>
+    </header>
+
+    <!-- Affichage du post -->
+
+    <!-- Container avec le/les postes -->
+        <!-- {{range $post := .Posts}} -->
+                <div class="container w-85 post button_post" name="Post_id" value="1">
+                    <!-- Haut du poste -->
+                    <div class="container-fluid post_header">
+                        <div class="row">
+                            <div class="col-sm-8 post_title">Titre</div>
+                            <div class="col-sm-4 post_autheur">Auteur</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8 categories">
+                                catégorie1 catégorie2 catégorie3
+                            </div>
+                            <div class="col-sm-4 categories">
+                                Date et heure de publication
+                            </div>
+                        </div>
+                    </div> 
+                      <!-- Contenu textuel  -->
+                        <div class="container content">
+                            <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus tempore atque, voluptate in harum possimus ratione dolorum obcaecati magnam illo quas veniam voluptates pariatur hic labore amet quisquam.
+                            </p>
+                        </div>
+    
+                        <!-- Image du post -->
+                        {{if .ImageAvailable}}
+                        <img src="{{.ImageURL}}">
+                        {{end}}
+    
+    
+                        <!-- Bas du post -->
+                        <div class="container-fluid post_footer">
+                            <button class = "btn btn-light likebutton">
+                                <img src = "../static/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                                <p class="nb_like"> 0 </p>
+                            </button>
+                            <button class = "btn btn-light likebutton">
+                                <img src = "../static/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                                <p class="nb_like"> 0 </p>
+                            </button> 
+                            <div class = "btn btn-light likebutton notbutton">
+                                <img src = "../static/css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
+                                <p class="nb_like"> 0 </p>
+                            </div> 
+                        </div>
+        </div>
+       </div>
+
+       <!-- Accordéon pour ajouter un commentaire -->
+
+       <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item container w-85 viewpost_acc">
+            <!--Bouton-->
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed accord" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <img class="plusimg" src="../static/css/node_modules/bootstrap-icons/icons/plus-square.svg">Ajouter un commentaire
+                </button>
+            </h2>
+            <!--Contenu-->
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <!--Formulaire pour ajouter un commentaire-->
+                    <form class="row" method="POST"> 
+                        <input type="text" name="comment_content" class="text_area_comment" required>
+                        <button class="btn btn-secondary comment_button" type="submit">Publier</button>
+                </div>
+            </div>
+        </div>
+   </div> 
+
+   <!-- Zone pour afficher les commantaires -->
+
+   <div class="container w-85 post button_post">
+        <div class="container-fluid post_header_com">
+            Commentaires
+        </div>
+        <div class="container comment">
+            <div class="comment_header">
+                <div class="comment_auteur">Auteur</div>
+                
+                <div class="comment_date">Date et heure</div>
+            </div>
+            <div class="comment_content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus tempore atque, voluptate in harum possimus ratione dolorum obcaecati magnam illo quas veniam voluptates pariatur hic labore amet quisquam.
+            </div>
+
+            <div class = "like_buttons">
+                <button class = "btn btn-light likebutton">
+                    <img src = "../static/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                    <p class="nb_like"> 0 </p>
+                </button>
+                <button class = "btn btn-light likebutton">
+                    <img src = "../static/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                    <p class="nb_like"> 0 </p>
+                </button> 
+            </div>
+        </div>    
+        
+
+   </div>
+    
+   <script src="../scripts/bootstrap.js"></script>
+</body>
+</html>

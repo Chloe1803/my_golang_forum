@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Forum du Jardinier</title>
+      <!--CSS links-->
+      <link rel="stylesheet" href="/css/bootstrap.css">
+      <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="container-fluid sticky-top">
+        <a href="/">
+            <H1 class="display-3">Le Forum du Jardinier</H1>
+        </a>
+
+    <!-- Div des boutons -->
+        <div class="btn-list">
+            {{if .Connected}}
+            <!-- Bouton de déconnection -->
+            <div class="btn-list_col">
+                <a href="/logout" class="btn btn-light" id="deconnect">
+                    <img src="/css/node_modules/bootstrap-icons/icons/person-check-fill.svg" alt="Se déconnecter">
+                </a>
+            <!-- Bouton pour rédiger un poste -->
+                <a href="/write" class ="btn btn-light bottom">
+                    <img src="/css/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Ecrire une publication">
+                </a>
+            </div>
+
+            {{else}}
+
+                <!-- Si utilisateur pas connecté, un seul bouton -->
+            <a href="/login" class="btn btn-light connect" id="connect">
+                <img src="/css/node_modules/bootstrap-icons/icons/person-fill.svg" alt="Se connecter">
+                <p class="p_connect"> Se connecter </p>
+            </a>
+
+            {{end}}
+        </div>
+    </header>
+
+    <!-- Affichage du post -->
+
+    <!-- Container avec le/les postes -->
+    {{$p := .Post}}
+    <div class="container w-85 post button_post" name="Post_id" value="1">
+        <!-- Haut du poste -->
+        <div class="container-fluid post_header">
+            <div class="row">
+                <div class="col-sm-8 post_title">{{$p.Title}}</div>
+                <div class="col-sm-4 post_autheur">{{$p.Author}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 categories">
+                    {{range $cat := $p.Categories}}
+                    {{$cat.Name}}
+                    {{end}}
+                </div>
+                <div class="col-sm-4 categories">
+                    {{$p.Timestamp.Day}}-{{$p.Timestamp.Month}}
+                </div>
+            </div>
+        </div> 
+          <!-- Contenu textuel  -->
+            <div class="container content">
+                <p>
+                    {{$p.Content}}
+                </p>
+            </div>
+
+            <!-- Image du post -->
+            {{if $p.ImageAvailable}}
+            <img src="{{$p.ImageURL}}">
+            {{end}}
+
+
+            <!-- Bas du post / Bouton like/dislike -->
+
+            {{if .Connected}}
+            <!-- Si l'utilisateur est connecté 3 cas possible en fonction de like status -->
+            {{if eq $p.Like_status 0 }}
+            <!-- Si l'utilisateur n'a rien liker/disliker -->
+            <div class="container-fluid post_footer">
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="p_like" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                        <p class="nb_like"> {{$p.Nb_like}} </p>
+                    </button>
+                </form>
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="p_dislike" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                        <p class="nb_like"> {{$p.Nb_dislike}} </p>
+                    </button> 
+                </form>
+                <div class = "btn btn-light likebutton notbutton">
+                    <img src = "css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
+                    <p class="nb_like"> {{$p.Nb_comments}} </p>
+                </div> 
+            </div>
+
+            {{else if eq $p.Like_status 1}}
+
+            <!-- Si l'utilisatueur à liker -->
+
+            <div class="container-fluid post_footer">
+                <!-- Bouton Unlike -->
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="p_unlike" value="true">
+                    <button class = "btn btn-success likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                        <p class="nb_like"> {{$p.Nb_like}} </p>
+                    </button>
+                </form>
+                <!-- Bouton dislike actif -->
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="p_change_to_dislike" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                        <p class="nb_like"> {{$p.Nb_dislike}} </p>
+                    </button> 
+                </form>
+
+                <div class = "btn btn-light likebutton notbutton">
+                    <img src = "css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
+                    <p class="nb_like"> {{$p.Nb_comments}} </p>
+                </div> 
+            </div>
+
+            {{else}}
+            <!-- Si l'utilisatueur à disliker -->
+
+            <div class="container-fluid post_footer">
+                <!-- Bouton pour passer de dislike à like -->
+                <form action="/view_post" method="get">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="p_change_to_like" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                        <p class="nb_like"> {{$p.Nb_like}} </p>
+                    </button>
+                </form>
+
+                <!-- Bouton Undislike -->
+                <form action="/view_post" method="get">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="p_undislike" value="true">
+                    <button class = "btn btn-danger likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                        <p class="nb_like"> {{$p.Nb_dislike}} </p>
+                    </button> 
+                </form>
+                <div class = "btn btn-danger likebutton notbutton">
+                    <img src = "css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
+                    <p class="nb_like"> {{$p.Nb_comments}} </p>
+                </div> 
+            </div>
+            {{end}}
+
+            {{else}}
+            <!-- Si l'utilisateur n'est pas connecté, pas de bouton -->
+            <div class="container-fluid post_footer">
+                <div classe = "icons">
+                    <img src = "/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                    <p class="picone"> {{$p.Nb_like}} </p>
+                </div>
+                <div classe = "icons">
+                    <img src = "/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                    <p class="picone"> {{$p.Nb_dislike}} </p>
+                </div> 
+                <div classe = "icons">
+                    <img src = "/css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
+                    <p class="picone"> {{$p.Nb_comments}} </p>
+                </div> 
+            </div>
+
+            {{end}}
+    </div>
+
+    <!-- Accordéon pour ajouter un commentaire -->
+
+    {{if .Connected}}
+
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item container w-85 viewpost_acc">
+            <!--Bouton-->
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed accord" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <img class="plusimg" src="css/node_modules/bootstrap-icons/icons/plus-square.svg">Ajouter un commentaire
+                </button>
+            </h2>
+            <!--Contenu-->
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <!--Formulaire pour ajouter un commentaire-->
+                    <form class="row" method="POST"> 
+                        <input type="text" name="comment_content" class="text_area_comment" required>
+                        <button class="btn btn-secondary comment_button" type="submit">Publier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </div> 
+
+   {{end}}
+
+   <!-- Zone pour afficher les commantaires -->
+
+   <div class="container w-85 post button_post">
+        <div class="container-fluid post_header_com">
+            Commentaires
+        </div>
+        
+        
+            {{range $com := .Comments}}
+            
+            {{if .Connected}}
+        <div class="container comment">
+            <div class="comment_header">
+                <div class="comment_auteur">{{$com.Author}}</div>
+                <div class="comment_date">{{$com.Time_stamp.Day}}-{{$com.Time_stamp.Month}}</div>
+            </div>
+            <div class="comment_content">
+            <p>
+                {{$com.Content}}
+            </p>
+            </div>
+            <!-- Bouton like/ dislke pour les commentaires -->
+            <div class = "like_buttons">
+
+            <!-- Si l'utilisateur est connecté 3 cas possible en fonction de like status -->
+            {{if eq $com.Like_status 0 }}
+            <!-- Si l'utilisateur n'a rien liker/disliker -->
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="Comment_id" value = {{$com.ID}}>
+                    <input type="hidden" name="com_like" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                        <p class="nb_like"> {{$com.Nb_like}} </p>
+                    </button>
+                </form>
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="Comment_id" value = {{$com.ID}}>
+                    <input type="hidden" name="com_dislike" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                        <p class="nb_like"> {{$com.Nb_dislike}} </p>
+                    </button> 
+                </form>
+            </div>
+        
+
+            {{else if eq $com.Like_status 1}}
+
+            <!-- Si l'utilisatueur à liker -->
+
+                <!-- Bouton Unlike -->
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="Comment_id" value = {{$com.ID}}>
+                    <input type="hidden" name="com_unlike" value="true">
+                    <button class = "btn btn-success likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                        <p class="nb_like"> {{$com.Nb_like}} </p>
+                    </button>
+                </form>
+                <!-- Bouton dislike actif -->
+                <form action="/view_post" method="GET">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="Comment_id" value = {{$com.ID}}>
+                    <input type="hidden" name="com_change_to_dislike" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                        <p class="nb_like"> {{$com.Nb_dislike}} </p>
+                    </button> 
+                </form>
+            </div>
+
+            {{else}}
+            <!-- Si l'utilisatueur à disliker -->
+
+                <!-- Bouton pour passer de dislike à like -->
+                <form action="/view_post" method="get">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="Comment_id" value = {{$com.ID}}>
+                    <input type="hidden" name="com_change_to_like" value="true">
+                    <button class = "btn btn-light likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                        <p class="nb_like"> {{$com.Nb_like}} </p>
+                    </button>
+                </form>
+
+                <!-- Bouton Undislike -->
+                <form action="/view_post" method="get">
+                    <input type="hidden" name="Post_id" value ="{{$p.ID}}">
+                    <input type="hidden" name="Comment_id" value = {{$com.ID}}>
+                    <input type="hidden" name="com_undislike" value="true">
+                    <button class = "btn btn-danger likebutton" type="submit">
+                        <img src = "css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                        <p class="nb_like"> {{$com.Nb_dislike}} </p>
+                    </button> 
+                </form>
+            </div>
+            {{end}}
+
+            {{else}}
+            <div class="container comment">
+                <div class="comment_header">
+                    <div class="comment_auteur">{{$com.Author}}</div>
+                    
+                    <div class="comment_date">{{$com.Time_stamp.Day}}-{{$com.Time_stamp.Month}}</div>
+                </div>
+                <div class="comment_content">
+                <p>
+                    {{$com.Content}}
+                </p>
+                </div>
+                <!-- Bouton like/ dislke pour les commentaires -->
+                <div class = "like_buttons">
+
+            <!-- Si l'utilisateur n'est pas connecté, pas de bouton -->
+            <div class="container-fluid post_footer">
+                <div classe = "icons">
+                    <img src = "/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                    <p class="picone"> {{$com.Nb_like}} </p>
+                </div>
+                <div classe = "icons">
+                    <img src = "/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                    <p class="picone"> {{$com.Nb_dislike}} </p>
+                </div> 
+            </div>
+
+            {{end}}
+
+
+            </div>
+        </div>    
+        {{end}}
+    </div>
+
+
+   <script src="../scripts/bootstrap.js"></script>
+</body>
+</html>

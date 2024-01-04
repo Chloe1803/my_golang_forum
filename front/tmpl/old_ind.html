@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Forum du jardinier</title>
+    
+    <!--CSS links-->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <!---Header Area-->
+   <header class="container-fluid sticky-top">
+        <h1 class="display-3">Le Forum du Jardinier</h1>
+        <div class="btn-list">
+            <button class ="btn btn-light">
+                <img src="../static/css/node_modules/bootstrap-icons/icons/bookmark-check.svg" alt="Mes préférances">
+            </button>
+            <button class ="btn btn-light">
+                <img src="../static/css/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Ecrire une publication">
+            </button>
+            <button class ="btn btn-light">
+                <img src="../static/css/node_modules/bootstrap-icons/icons/person-fill.svg" alt="Se connecter">
+            </button>
+        </div>
+   </header>
+
+   <!--Zone avec les filtres-->
+   <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <!--Bouton-->
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Filtrer par catégorie
+                </button>
+            </h2>
+            <!--Contenu-->
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                        <!--Formulaire pour le filtre par catégorie-->
+                        <!-- Vrai Code -->
+                        <!-- {{range $i, $cat := .Categories}}
+                        <input type="checkbox" name="c{{$i}}" id="c{{$i}}" value="{{$cat}}" ><label for="c{{$i}}">{{$cat}}</label>
+                        {{end}}
+                        <input type="submit" value="Filtrer"/> -->
+                        
+                        <!-- Code en attendant -->
+
+                        <form class="accord-form" action="/" method="GET"> 
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" name="c0" id="c0" value="Cactus/Succulentes" ><label class="form-check-label" for="c0">Cactus/Succulentes</label>
+                            </div>
+                            <div class="form-check form-check-inline">    
+                                <input type="checkbox" class="form-check-input" name="c1" id="c1" value="Plantes Vertes" ><label class="form-check-label" for="c1">Plantes Vertes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" name="c2" id="c2" value="Potager" ><label class="form-check-label" for="c2">Potager</label>
+                            </div>
+                            <div class="form-check form-check-inline">    
+                                <input type="checkbox" class="form-check-input" name="c3" id="c3" value="Permaculture" ><label class="form-check-label" for="c3">Permaculture</label>
+                            </div>
+                            <button class="btn btn-sucess"><input type="submit"  value="Filtrer"/></button>     
+                        </form>
+                </div>
+            </div>
+        </div>
+   </div> 
+   <!-- Container avec le/les postes -->
+        <!-- {{range $post := .Posts}} -->
+    <div class="container w-85 post">
+        <form method = "get" action ="/viewpost">
+            <button type="submit" class="container button_post" name="Post_id" value="1">
+                <!-- Haut du poste -->
+                <div class="container-fluid post_header">
+                    <div class="row">
+                         <div class="col-sm-8 post_title">Titre</div>
+                        <div class="col-sm-4 post_autheur">Auteur</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 categories">
+                            catégorie1 catégorie2 catégorie3
+                        </div>
+                        <div class="col-sm-4 categories">
+                            Date et heure de publication
+                        </div>
+                    </div>
+                </div> 
+                  <!-- Contenu textuel  -->
+                    <div class="container content">
+                        <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus tempore atque, voluptate in harum possimus ratione dolorum obcaecati magnam illo quas veniam voluptates pariatur hic labore amet quisquam.
+                        </p>
+                    </div>
+
+                    <!-- Image du post -->
+                    {{if .ImageAvailable}}
+                    <img src="{{.ImageURL}}">
+                    {{end}}
+
+
+                    <!-- Bas du post -->
+                    <div class="container-fluid post_footer">
+                        <div classe = "icons">
+                            <img src = "../static/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
+                            <p class="picone"> 0 </p>
+                        </div>
+                        <div classe = "icons">
+                            <img src = "../static/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
+                            <p class="picone"> 0 </p>
+                        </div> 
+                        <div classe = "icons">
+                            <img src = "../static/css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
+                            <p class="picone"> 0 </p>
+                        </div> 
+                    </div>
+            </button>
+        </form>
+    </div>
+
+   <!-- Bouton de pagination -->
+   <form class="col" action="/" method="GET">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <!-- {{range $i := .NbBouton}}
+            {{ $Btn := $i }}
+            {{ if eq $.NbPage $Btn }}
+                <li class="page-item"><button class="pagination-button selectedPage" type="button" data-nbPage="{{$Btn}}">{{$Btn}}</button></li>
+            {{else}}
+            <li class="page-item"><button class="pagination-button" type="button" data-nbPage="{{$Btn}}">{{$Btn}}</button></li>
+            {{ end }}          
+            {{end}}    -->
+        </ul>
+    </nav>
+    </form>
+
+    <!-- Footer retour en haut de la page -->
+
+    <div class="container-fluid footer">
+        <a href="#" id="retour-haut">Retourner en haut de la page</a>
+    </div>
+  
+    <script src="../scripts/bootstrap.js"></script>
+</body>
+</html>
