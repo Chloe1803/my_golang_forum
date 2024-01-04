@@ -1,35 +1,35 @@
-        /* Style pour la page d'accueil */
- body {
-    background-color: #D2E1DE;
- }
+/* Style pour la page d'accueil */
+body {
+  background-color: #d2e1de;
+}
 
 /* Style for the header */
 
 header {
-    background-image: url("../img/annie-spratt-lRcoPGrwkv0-unsplash.jpg");  
-    background-size: cover;
-    height: 100px;
-    padding: 12px;
+  background-image: url("../img/annie-spratt-lRcoPGrwkv0-unsplash.jpg");
+  background-size: cover;
+  height: 100px;
+  padding: 12px;
 }
 
-H1{
-    color: whitesmoke;
-    background-color: #3A3647;
-    border-radius: 5%;
-    display: inline;
-    position : absolute;
-    bottom : 0px;
-    left : 0px;
-    margin :0
+H1 {
+  color: whitesmoke;
+  background-color: #3a3647;
+  border-radius: 5%;
+  display: inline;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin: 0;
 }
 
 .btn-list {
-    position : absolute;
-    display: flex;
-    flex-direction: row;
-    top: 0px;
-    right: 0px;
-    margin : 10px
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 0px;
+  right: 0px;
+  margin: 10px;
 }
 
 .btn-list_col {
@@ -54,85 +54,86 @@ H1{
 /* Style pour le filtre de catégorie */
 
 .accord-form {
-    padding: 10px;
+  padding: 10px;
 }
 
 /* Style pour les postes */
 
 .post_title {
-    text-align: left;
-    color :#3A3647;
-    font-size: large;
+  text-align: left;
+  color: #3a3647;
+  font-size: large;
 }
 
 .post_autheur {
-    text-align: left;
-    position: relative;
-    bottom: 0px;
-    color: grey;
+  text-align: left;
+  position: relative;
+  bottom: 0px;
+  color: grey;
 }
 
 .categories {
-    text-align: left;
-    color: grey;
-    font-size: small;
+  text-align: left;
+  color: grey;
+  font-size: small;
 }
 
 .post {
-    margin-top: 20px;
+  margin-top: 20px;
+  border: #3a3647 5px;
+  border-radius: 2%;
 }
 
 .content {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    font-size: medium;
-    font-weight: 100;
-    padding: 10px;
-    margin : 0px;
-    max-width: 100%; 
-    word-wrap: break-word;
-    overflow: hidden;
-
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: medium;
+  font-weight: 100;
+  padding: 10px;
+  margin: 0px;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 .content p {
-    text-align: justify;
-    color:black;
+  text-align: justify;
+  color: black;
 }
 
 .post_header {
-    padding: 10px;
-    margin: 0px 0px 10px 0px;
-    background-color: #C3D0D8;
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+  background-color: #c3d0d8;
 }
 
 .post_footer {
-    display :flex;
-    flex-direction: row;
-    justify-content: end;
-    height: 50px;
-    padding: 10px;
-    margin: 10px 0px 0px 0px;
-    background-color: #C3D0D8;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  height: 50px;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+  background-color: #c3d0d8;
 }
 
 .icons {
-    display :flex;
-    flex-direction: row;
-    align-items: right;
-    display: inline-block; /* Utilisez inline-block pour mettre les éléments sur la même ligne */
-    margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  display: inline-block; /* Utilisez inline-block pour mettre les éléments sur la même ligne */
+  margin-right: 10px;
 }
 
 .picone {
-    display: inline-block;
-    margin-right: 5px;
-    white-space: nowrap;
+  display: inline-block;
+  margin-right: 5px;
+  white-space: nowrap;
 }
 
 .connect {
-  display :flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -142,172 +143,177 @@ H1{
 }
 
 .button_post {
-    background-color: white;
-    border: #3A3647 5px;
-    border-radius: 2%;
-    padding: 0px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre */
+  background-color: white;
+  border: #3a3647 5px;
+  border-radius: 2%;
+  padding: 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre */
+}
+
+.img_container {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Style pour le footer */
 
 .pagination {
-    align-items: center;
-    position: fixed;
-    bottom: 60px;
+  align-items: center;
+  position: fixed;
+  bottom: 60px;
 }
- .footer {
-    background-color: #3A3647;
-    margin: 0px;
-    color: white;
-    text-align: center;
-    font-size: large;
-    height: 50px;
-    position: fixed;
-    bottom: 0;
-    
- }
+.footer {
+  background-color: #3a3647;
+  margin: 0px;
+  color: white;
+  text-align: center;
+  font-size: large;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+}
 
- .footer a {
-    color: white;
- }
+.footer a {
+  color: white;
+}
 
-
-        /* Style pour la page de logIn */
+/* Style pour la page de logIn */
 
 .log {
-    background-color: white;
-    padding: 20px; /* Ajoutez un espace interne pour l'apparence */
-    border: 1px solid #ccc; /* Ajoutez une bordure */
-    margin-top: 40px; /* Espacement du haut pour la placer sous l'en-tête */
-    max-width: 400px; /* Largeur maximale de la div */
-    margin-left: auto;
-    margin-right: auto; /* Centrez la div horizontalement */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre */
+  background-color: white;
+  padding: 20px; /* Ajoutez un espace interne pour l'apparence */
+  border: 1px solid #ccc; /* Ajoutez une bordure */
+  margin-top: 40px; /* Espacement du haut pour la placer sous l'en-tête */
+  max-width: 400px; /* Largeur maximale de la div */
+  margin-left: auto;
+  margin-right: auto; /* Centrez la div horizontalement */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre */
 }
 
 /* Style de la première ligne horizontale */
 .separator {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 20px 0; /* Espacement au-dessus et en dessous de la ligne */
-  }
-  
-  /* Style de la deuxième ligne en utilisant une div */
-  .separator-line {
-    height: 1px;
-    background-color: #ccc;
-    margin: 20px 0; /* Espacement au-dessus et en dessous de la ligne */
-  }
- 
- 
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0; /* Espacement au-dessus et en dessous de la ligne */
+}
 
-  .Login_tilte {
-    font-size: 30px;
-    font-weight: 500;
-    text-align: center;
-    padding: 15px;
-  }
+/* Style de la deuxième ligne en utilisant une div */
+.separator-line {
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0; /* Espacement au-dessus et en dessous de la ligne */
+}
 
-  .labelpwun {
-    display: block;
-    margin: 5px;
-    font-size: large;
-  }
+.Login_tilte {
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+  padding: 15px;
+}
 
-  .textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none; /* Supprime la bordure par défaut */
-    border-bottom: 2px solid #3498db; /* Ajoute une bordure inférieure */
-    outline: none; /* Supprime la mise en évidence au focus */
-    background-color: transparent; /* Fond transparent */
-    transition: border-bottom-color 0.3s ease; /* Transition de couleur de la bordure */
-  }
-  
-  .textarea:focus {
-    border-bottom-color: #e74c3c; /* Changement de couleur au focus */
-    transition: border-bottom-color 0.3s ease;
-  }
+.labelpwun {
+  display: block;
+  margin: 5px;
+  font-size: large;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none; /* Supprime la bordure par défaut */
+  border-bottom: 2px solid #3498db; /* Ajoute une bordure inférieure */
+  outline: none; /* Supprime la mise en évidence au focus */
+  background-color: transparent; /* Fond transparent */
+  transition: border-bottom-color 0.3s ease; /* Transition de couleur de la bordure */
+}
+
+.textarea:focus {
+  border-bottom-color: #e74c3c; /* Changement de couleur au focus */
+  transition: border-bottom-color 0.3s ease;
+}
 
 .center-button {
-    display: block;
+  display: block;
   margin: 0 auto;
 }
 .btn-con {
-    margin-bottom: 20px;
-  }
+  margin-bottom: 20px;
+}
 
-  /* Style pour la page View Post */
+/* Style pour la page View Post */
 
-  .likebutton {
-    display: flex;
-    flex-direction : row;
-    align-items: center;
-    margin : 5px;
-    height: 90%;
-  }
+.likebutton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px;
+  height: 90%;
+}
 
-  .nb_like{
-    margin: 0px 3px 0px 3px;
-    
-  }
+.nb_like {
+  margin: 0px 3px 0px 3px;
+}
 
-  .like_buttons {
-    display :flex;
-    flex-direction: row;
-    justify-content: end;
-  }
+.like_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
 
-  .notbutton {
-    background-color: #C3D0D8;
-    border: #3A3647 solid 1px;
-  }
+.notbutton {
+  background-color: #c3d0d8;
+  border: #3a3647 solid 1px;
+}
 
-  .viewpost_acc {
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.viewpost_acc {
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .plusimg {
-    margin : 10px
-  }
+.plusimg {
+  margin: 10px;
+}
 
-  .text_area_comment {
-    width: 100%;
-    height : 140px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.2s ease-in-out;
-    overflow-wrap: break-word;
-  }
+.text_area_comment {
+  width: 100%;
+  height: 140px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  overflow-wrap: break-word;
+}
 
-  .text_area_comment:focus {
-    border-color: #007bff; /* Change la couleur de la bordure lorsque le champ est en focus */
+.text_area_comment:focus {
+  border-color: #007bff; /* Change la couleur de la bordure lorsque le champ est en focus */
 }
 
 .comment_button {
-    padding-top: 15px;
+  padding-top: 15px;
 }
 
-.accord:active{
-    background-color: white;
+.accord:active {
+  background-color: white;
 }
 
 .post_header_com {
   padding: 10px;
   margin: 0px 0px 0px 0px;
-  background-color: #C3D0D8;
+  background-color: #c3d0d8;
 }
 
 .comment {
   display: flex;
   flex-direction: column;
-  border: #3A3647 solid 1px;
+  border: #3a3647 solid 1px;
   background-color: white;
   padding: 5px;
 }
@@ -323,12 +329,12 @@ H1{
   font-weight: bold;
 }
 
-.comment_date{
+.comment_date {
   padding: 5px;
   margin-left: 5px;
 }
 
-          /* Style pour la page Create Post */
+/* Style pour la page Create Post */
 
 .create_post_h2 {
   text-align: center;
@@ -359,10 +365,3 @@ H1{
 .hidden-input {
   visibility: hidden;
 }
-  
-  
-  
-  
-  
-  
-

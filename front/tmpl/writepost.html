@@ -1,77 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Le Forum du jardinier</title>
 
     <!--CSS links-->
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-     <!---Header Area-->
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!---Header Area-->
     <header class="container-fluid sticky-top">
-        <a href="/">
-            <H1 class="display-3">Le Forum du Jardinier</H1>
-        </a>
+      <a href="/">
+        <h1 class="display-3">Le Forum du Jardinier</h1>
+      </a>
     </header>
 
     <!-- Contenaire avec le forumlaire -->
 
     <div class="container w-85 post">
-        <form method = "post" action ="/write" enctype="multipart/form-data"  onsubmit="return checkFileSize()">
-             <!-- Haut du poste -->
-             <div class="container-fluid post_header create_post_h2">
-                <h2 class="display-6">Créer une nouvelle publication</h2>
-             </div>
+      <form
+        method="post"
+        action="/write"
+        enctype="multipart/form-data"
+        onsubmit="return checkFileSize()"
+      >
+        <!-- Haut du poste -->
+        <div class="container-fluid post_header create_post_h2">
+          <h2 class="display-6">Créer une nouvelle publication</h2>
+        </div>
 
-             <!-- Corps du formulaire -->
-             <div class="container content_create_post">
+        <!-- Corps du formulaire -->
+        <div class="container content_create_post">
+          <h3 class="h3_cp">Titre :</h3>
+          <input type="text" class="textarea" name="title" required />
 
-                <h3 class="h3_cp">Titre :</h3>
-                <input type="text" class= "textarea" name="title" required>
+          <h3 class="h3_cp">Catégorie :</h3>
 
-                <h3 class="h3_cp">Catégorie :</h3>
+          {{range $i, $cat := .Categories}}
 
-                {{range $i, $cat := .Categories}}
+          <input
+            type="checkbox"
+            class="form-check-input"
+            name="{{$cat.Name}}"
+            id="c{{$i}}"
+            value="{{$cat.ID}}"
+          />
+          <label class="form-check-label" for="c{{$i}}">{{$cat.Name}}</label>
 
-                <input type="checkbox" class="form-check-input" name="{{$cat.Name}}" id="c{{$i}}" value="{{$cat.ID}}" >
-                <label class="form-check-label" for="c{{$i}}">{{$cat.Name}}</label>
-                
-                {{end}}
+          {{end}}
 
-                <h3 class="h3_cp">Contenu :</h3>
+          <h3 class="h3_cp">Contenu :</h3>
 
-                <input type="text" name="content" class="text_area_comment"required>
+          <input
+            type="text"
+            name="content"
+            class="text_area_comment"
+            required
+          />
 
-                <button class="btn btn-light btn-lg btn-con center-button img_btn_cp">
-                    <img src="/css/node_modules/bootstrap-icons/icons/link.svg" alt="Ajouter une pièce jointe">
-                    Ajouter une image
-                    <input type="file" name="post_image" accept="image/*" id="post_image_input">
-                </button>
+          <label class="btn btn-light btn-lg btn-con center-button img_btn_cp">
+            <img
+              src="/css/node_modules/bootstrap-icons/icons/link.svg"
+              alt="Ajouter une pièce jointe"
+            />
+            Ajouter une image
+            <input
+              type="file"
+              name="post_image"
+              accept="image/*"
+              id="post_image_input"
+              style="display: none"
+            />
+          </label>
 
-                <button type="submit" class="btn btn-primary center-button img_btn_cp">Publier</button>
-
-            </div>
-        </form>
+          <button
+            type="submit"
+            class="btn btn-primary center-button img_btn_cp"
+          >
+            Publier
+          </button>
+        </div>
+      </form>
     </div>
 
     <script>
-        function checkFileSize() {
-            var fileInput = document.getElementById("post_image_input");
-            if (fileInput.files.length > 0) {
-                var fileSize = fileInput.files[0].size; // Taille du fichier en octets
-                var maxFileSize = 20 * 1024 * 1024; // 20 MB en octets
-                if (fileSize > maxFileSize) {
-                    var fileSizeError = document.getElementById("fileSizeError");
-                    fileSizeError.textContent = "Fichier trop volumineux (limite : 20 MB)"; // Affiche le message d'erreur
-                    return false; // Empêche la soumission du formulaire
-                }
-            }
-            return true; // Autorise la soumission du formulaire
+      function checkFileSize() {
+        var fileInput = document.getElementById("post_image_input");
+        if (fileInput.files.length > 0) {
+          var fileSize = fileInput.files[0].size; // Taille du fichier en octets
+          var maxFileSize = 20 * 1024 * 1024; // 20 MB en octets
+          if (fileSize > maxFileSize) {
+            var fileSizeError = document.getElementById("fileSizeError");
+            fileSizeError.textContent =
+              "Fichier trop volumineux (limite : 20 MB)"; // Affiche le message d'erreur
+            return false; // Empêche la soumission du formulaire
+          }
         }
+        return true; // Autorise la soumission du formulaire
+      }
     </script>
-    
-</body>
+  </body>
 </html>

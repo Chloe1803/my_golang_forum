@@ -70,12 +70,12 @@
                     {{$p.Content}}
                 </p>
             </div>
-
-            <!-- Image du post -->
-            {{if $p.ImageAvailable}}
-            <img src="{{$p.ImageURL}}">
-            {{end}}
-
+              <!-- Image du post -->
+              {{if $p.ImageAvailable}}
+              <div class="img_container">
+                  <img src="{{$p.ImageURL}}">
+              </div>
+              {{end}}
 
             <!-- Bas du post / Bouton like/dislike -->
 

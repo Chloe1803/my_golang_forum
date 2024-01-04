@@ -1,153 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Le Forum du jardinier</title>
 
-     <!--CSS links-->
-     <link rel="stylesheet" href="/css/bootstrap.css">
-     <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+    <!--CSS links-->
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
     <!---Header Area-->
     <header class="container-fluid sticky-top">
-        <a href="/">
-            <h1 class="display-3">Le Forum du Jardinier</h1>
-        </a>
-        <!-- Div des boutons -->
-        <div class="btn-list">
-            {{if .Connected}}
+      <a href="/">
+        <h1 class="display-3">Le Forum du Jardinier</h1>
+      </a>
+      <!-- Div des boutons -->
+      <div class="btn-list">
+        {{if .Connected}}
 
-            <!-- Les 2 boutons qui permettent de filtrer -->
-                <div class="btn-list_col">
-                    <form method="get" action="/" class="fav_form">
-                        <input type="hidden" id="Filtered_by_user_post" name="Filtered_by_user_post" value="true">
-                        <button class="btn btn-light fav" type="submit">
-                            <img src="/css/node_modules/bootstrap-icons/icons/bookmark-check.svg">
-                            Voir mes publications
-                        </button>
-                    </form>
-                    <form method="get" action="/" class="fav_form">
-                        <input type="hidden" id="Filtered_by_user_like" name="Filtered_by_user_like" value="true">
-                        <button class="btn btn-light fav bottom" type="submit">
-                            <img src="/css/node_modules/bootstrap-icons/icons/bookmark-check.svg">
-                            Voir mes likes
-                        </button>
-                    </form>
-                </div>
-
-            <!-- Les 2 autres boutons -->
-            <div class="btn-list_col">
-                <a href="/logout" class="btn btn-light" id="deconnect">
-                    <img src="/css/node_modules/bootstrap-icons/icons/person-check-fill.svg" alt="Se déconnecter">
-                </a>
-
-                <a href="/write" class ="btn btn-light bottom">
-                    <img src="/css/node_modules/bootstrap-icons/icons/pencil-square.svg" alt="Ecrire une publication">
-                </a>
-            </div>
-
-            {{else}}
-
-            <!-- Si utilisateur pas connecté, un seul bouton -->
-            <a href="/login" class="btn btn-light connect" id="connect">
-                <img src="/css/node_modules/bootstrap-icons/icons/person-fill.svg" alt="Se connecter">
-                <p class="p_connect"> Se connecter </p>
-            </a>
-
-            {{end}}
+        <!-- Les 2 boutons qui permettent de filtrer -->
+        <div class="btn-list_col">
+          <form method="get" action="/" class="fav_form">
+            <input
+              type="hidden"
+              id="Filtered_by_user_post"
+              name="Filtered_by_user_post"
+              value="true"
+            />
+            <button class="btn btn-light fav" type="submit">
+              <img
+                src="/css/node_modules/bootstrap-icons/icons/bookmark-check.svg"
+              />
+              Voir mes publications
+            </button>
+          </form>
+          <form method="get" action="/" class="fav_form">
+            <input
+              type="hidden"
+              id="Filtered_by_user_like"
+              name="Filtered_by_user_like"
+              value="true"
+            />
+            <button class="btn btn-light fav bottom" type="submit">
+              <img
+                src="/css/node_modules/bootstrap-icons/icons/bookmark-check.svg"
+              />
+              Voir mes likes
+            </button>
+          </form>
         </div>
+
+        <!-- Les 2 autres boutons -->
+        <div class="btn-list_col">
+          <a href="/logout" class="btn btn-light" id="deconnect">
+            <img
+              src="/css/node_modules/bootstrap-icons/icons/person-check-fill.svg"
+              alt="Se déconnecter"
+            />
+          </a>
+
+          <a href="/write" class="btn btn-light bottom">
+            <img
+              src="/css/node_modules/bootstrap-icons/icons/pencil-square.svg"
+              alt="Ecrire une publication"
+            />
+          </a>
+        </div>
+
+        {{else}}
+
+        <!-- Si utilisateur pas connecté, un seul bouton -->
+        <a href="/login" class="btn btn-light connect" id="connect">
+          <img
+            src="/css/node_modules/bootstrap-icons/icons/person-fill.svg"
+            alt="Se connecter"
+          />
+          <p class="p_connect">Se connecter</p>
+        </a>
+
+        {{end}}
+      </div>
     </header>
 
     <!-- Accordéon avec les filtres de catégorie -->
 
     <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-            <!--Bouton-->
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Filtrer par catégorie
-                </button>
-            </h2>
+      <div class="accordion-item">
+        <!--Bouton-->
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne"
+            aria-expanded="false"
+            aria-controls="flush-collapseOne"
+          >
+            Filtrer par catégorie
+          </button>
+        </h2>
 
-            <!--Contenu-->
-            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                    <!--Formulaire pour le filtre par catégorie-->
-                    <form class="accord-form" action="/" method="GET"> 
-                        {{range $i, $cat := .Categories}}
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" name="c{{$i}}" id="c{{$i}}" value="{{$cat.ID}}" ><label for="c{{$i}}">{{$cat.Name}}</label>
-                        </div>
-                        {{end}}
-                        <button class="btn btn-sucess">
-                            <input type="submit"  value="Filtrer"/>
-                        </button>     
-                    </form>
-                </div>
-            </div>
+        <!--Contenu-->
+        <div
+          id="flush-collapseOne"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            <!--Formulaire pour le filtre par catégorie-->
+            <form class="accord-form" action="/" method="GET">
+              {{range $i, $cat := .Categories}}
+              <div class="form-check form-check-inline">
+                <input
+                  type="checkbox"
+                  name="c{{$i}}"
+                  id="c{{$i}}"
+                  value="{{$cat.ID}}"
+                /><label for="c{{$i}}">{{$cat.Name}}</label>
+              </div>
+              {{end}}
+              <button class="btn btn-sucess">
+                <input type="submit" value="Filtrer" />
+              </button>
+            </form>
+          </div>
         </div>
-    </div> 
-    
+      </div>
+    </div>
+
     <!-- Affichage des posts -->
 
     {{range $post := .Index_posts}}
 
     <div class="container w-85 post">
-        <form method = "get" action ="/view_post">
-            <button type="submit" class="container button_post" name="Post_id" value="{{$post.ID}}">
-                <!-- Haut du poste -->
-                <div class="container-fluid post_header">
-                    <div class="row">
-                        <div class="col-sm-8 post_title">{{$post.Title}}</div>
-                        <div class="col-sm-4 post_autheur">{{$post.Author}}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-8 categories">
-                            {{range $cat := $post.Categories}}
-                            {{$cat.Name}}
-                            {{end}}
-                            
-                        </div>
-                        <div class="col-sm-4 categories">
-                            {{$post.Timestamp.Day}}-{{$post.Timestamp.Month}}
-                        </div>
-                    </div>
-                </div> 
-                <!-- Contenu textuel  -->
-                <div class="container content">
-                    <p>
-                    {{$post.Content}}
-                    </p>
-                </div>
+      <form method="get" action="/view_post">
+        <button
+          type="submit"
+          class="container button_post"
+          name="Post_id"
+          value="{{$post.ID}}"
+        >
+          <!-- Haut du poste -->
+          <div class="container-fluid post_header">
+            <div class="row">
+              <div class="col-sm-8 post_title">{{$post.Title}}</div>
+              <div class="col-sm-4 post_autheur">{{$post.Author}}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 categories">
+                {{range $cat := $post.Categories}} {{$cat.Name}} {{end}}
+              </div>
+              <div class="col-sm-4 categories">
+                {{$post.Timestamp.Day}}-{{$post.Timestamp.Month}}
+              </div>
+            </div>
+          </div>
+          <!-- Contenu textuel  -->
+          <div class="container content">
+            <p>{{$post.Content}}</p>
+          </div>
+          <!-- Image du post -->
+          {{if .ImageAvailable}}
+          <div class="img_container">
+            <img src="{{.ImageURL}}" />
+          </div>
+          {{end}}
 
-                <!-- Image du post -->
-                {{if .ImageAvailable}}
-                <img src="{{.ImageURL}}">
-                {{end}}
-
-                <!-- Bas du post -->
-                <div class="container-fluid post_footer">
-                    <div classe = "icons">
-                        <img src = "/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg" alt="like"> 
-                        <p class="picone"> {{$post.Nb_like}} </p>
-                    </div>
-                    <div classe = "icons">
-                        <img src = "/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg" alt="dislike">
-                        <p class="picone"> {{$post.Nb_dislike}} </p>
-                    </div> 
-                    <div classe = "icons">
-                        <img src = "/css/node_modules/bootstrap-icons/icons/chat-dots.svg" alt="comments">
-                        <p class="picone"> {{$post.Nb_comments}} </p>
-                    </div> 
-                </div>
-            </button>
-        </form>
+          <!-- Bas du post -->
+          <div class="container-fluid post_footer">
+            <div classe="icons">
+              <img
+                src="/css/node_modules/bootstrap-icons/icons/hand-thumbs-up.svg"
+                alt="like"
+              />
+              <p class="picone">{{$post.Nb_like}}</p>
+            </div>
+            <div classe="icons">
+              <img
+                src="/css/node_modules/bootstrap-icons/icons/hand-thumbs-down.svg"
+                alt="dislike"
+              />
+              <p class="picone">{{$post.Nb_dislike}}</p>
+            </div>
+            <div classe="icons">
+              <img
+                src="/css/node_modules/bootstrap-icons/icons/chat-dots.svg"
+                alt="comments"
+              />
+              <p class="picone">{{$post.Nb_comments}}</p>
+            </div>
+          </div>
+        </button>
+      </form>
     </div>
     {{end}}
 
-    
     <script src="/scripts/bootstrap.js"></script>
-</body>
+  </body>
 </html>
