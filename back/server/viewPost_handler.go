@@ -60,7 +60,7 @@ func ViewPost(w http.ResponseWriter, r *http.Request) {
 				Error(w, r, err, "Erreur lors de l'ajout d'un commentaire", http.StatusInternalServerError)
 				return
 			}
-			err = q.UpdateNbLike("comments", "post_id", data.Post.ID, "comments", 1)
+			err = q.UpdateNbLike("posts", "post_id", data.Post.ID, "comments", 1)
 			if err != nil {
 				Error(w, r, err, "Erreur lors de l'ajout d'un commentaire", http.StatusInternalServerError)
 				return

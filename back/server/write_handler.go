@@ -90,15 +90,15 @@ func WriteHandler(w http.ResponseWriter, r *http.Request) {
 		if imageHeader != nil {
 			defer imageFile.Close()
 
-			// Obtenez le type MIME de l'image téléchargée
+			// type MIME de l'image téléchargée
 			imageType = imageHeader.Header.Get("Content-Type")
-			// Vérifiez que le type d'image est autorisé (JPEG, PNG ou GIF).
+			// Vérifie que le type d'image est autorisé (JPEG, PNG ou GIF).
 			if imageType != "image/jpeg" && imageType != "image/png" && imageType != "image/gif" {
 				// Type d'image non autorisé.
 				Error(w, r, nil, "Unsupported image format in createpost", http.StatusUnsupportedMediaType)
 				return
 			}
-			// Construire  le chemin complet du fichier image en utilisant le nom de fichier unique.
+			// Construit le chemin complet du fichier image en utilisant le nom de fichier unique.
 			uniqueImageFilename := "imageOfPostnumber" + strconv.Itoa(int(post_id))
 			imageFilePath := "img/" + uniqueImageFilename
 			img, err := os.Create("./front/static/" + imageFilePath)

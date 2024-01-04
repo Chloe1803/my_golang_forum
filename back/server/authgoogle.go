@@ -12,7 +12,7 @@ import (
 var (
 	clientID     = "422408899006-86v80fdaehbnbh3a9vfno0livpcmk78c.apps.googleusercontent.com"
 	clientSecret = "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"
-	redirectURI  = "http://localhost:8080/auth"
+	redirectURI  = "https://localhost:8080/auth"
 )
 
 //Fonction pour gérer la redirection vers l'authentification Google

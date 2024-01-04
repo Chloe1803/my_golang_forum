@@ -23,7 +23,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//Récuperation du cookie et du statue de connection
+	//Récuperation du cookie et du statue de connexion
 	data.Connected = false
 
 	user_id, err := f.FetchCookie(r)
@@ -76,7 +76,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			if len(filtered_categories) != 0 {
 				data.Index_posts, err = q.GetPostbyCat(filtered_categories)
 				if err != nil {
-					Error(w, r, err, "Problème Requête tPostbyCat", http.StatusInternalServerError)
+					Error(w, r, err, "Problème Requête PostbyCat", http.StatusInternalServerError)
 					return
 				}
 			}

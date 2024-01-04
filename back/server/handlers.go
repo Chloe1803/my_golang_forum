@@ -3,7 +3,6 @@ package forum
 import (
 	"fmt"
 	"net/http"
-	"text/template"
 )
 
 func Handlers() {
@@ -26,18 +25,6 @@ func Handlers() {
 	//Page pour voir et commenter une publication
 	http.HandleFunc("/view_post", ViewPost)
 
-	fmt.Println("Listening to port 8080...")
-	// http.ListenAndServe(":8080", nil)
+	fmt.Println("Listening to port 8080... https://localhost:8080")
 
-}
-
-func TestHandler(w http.ResponseWriter, r *http.Request) {
-
-	tmpl := template.Must(template.ParseGlob("./front/tmpl/test.html"))
-
-	err := tmpl.ExecuteTemplate(w, "test.html", "")
-	if err != nil {
-		Error(w, r, err, "Erreur lors de l'exécution du template Register", http.StatusInternalServerError)
-		return
-	}
 }
