@@ -1,0 +1,11 @@
+FROM golang:1.19
+LABEL author="Chloé Masse"
+WORKDIR /app
+COPY go.mod ./
+RUN go mod download
+COPY . ./
+WORKDIR /app/cmd
+RUN go build -o ../forum
+EXPOSE 8080
+WORKDIR /app
+ENTRYPOINT ["./forum"]

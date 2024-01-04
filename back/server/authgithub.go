@@ -14,7 +14,7 @@ import (
 const (
 	githubClientID     = "1a3fdbb57dd1031f6a68"
 	githubClientSecret = "36c8a887c0b900fcf6f94a841a61438c5e292f64"
-	githubRedirectURL  = "https://localhost:8080/GitCallBack"
+	githubRedirectURL  = "http://localhost:8080/GitCallBack"
 )
 
 // Struct pour la réponse du token GitHub
