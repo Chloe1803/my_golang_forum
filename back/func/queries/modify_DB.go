@@ -4,6 +4,7 @@ import (
 	"database/sql"
 )
 
+//Fonction qui initialise la connexion avec la DB
 func GetDatabase() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "back/database/forum.db")
 	if err != nil {
@@ -13,6 +14,32 @@ func GetDatabase() (*sql.DB, error) {
 	return db, nil
 }
 
+//Fonction pour ajouter des éléments à la DB
+func QueryAddToDB(query string, args []interface{}) error {
+
+	db, err := GetDatabase()
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(query, args...)
+
+	return err
+}
+
+//Fonction pour ajouter des éléments à la DB et qui renvoie un résultat
+func QueryAddToDBwithRes(query string, args []interface{}) (sql.Result, error) {
+
+	db, err := GetDatabase()
+	if err != nil {
+		return nil, err
+	}
+	res, err1 := db.Exec(query, args...)
+
+	return res, err1
+}
+
+
+//Fonction qui consulte la DB et renvoie un entier
 func QueryReturnOneNb(query string, args []interface{}) (int, error) {
 
 	var res int
@@ -29,6 +56,7 @@ func QueryReturnOneNb(query string, args []interface{}) (int, error) {
 
 	return res, err
 }
+
 
 func QueryReturnPasswordAndId(query string, args []interface{}) (string, int, error) {
 

@@ -14,7 +14,7 @@ func AddNewUser(email string, username string, password string) error {
 	var args []interface{}
 	args = append(args, email, username, password)
 
-	err := QueryAddUser(query, args)
+	err := QueryAddToDB(query, args)
 
 	return err
 }
@@ -31,7 +31,7 @@ func DeleteUserSession(sessionIDstr string) error {
 	var args []interface{}
 	args = append(args, sessionID)
 
-	err = QueryAddUser(query, args)
+	err = QueryAddToDB(query, args)
 
 	return err
 }
@@ -43,7 +43,7 @@ func AddnewPost(title string, user_id int, time_stamp time.Time, content string)
 
 	query := "INSERT INTO posts (title, user_id, created, content) VALUES (?, ?, ?, ?)"
 
-	return QueryAddPost(query, args)
+	return QueryAddToDBwithRes(query, args)
 }
 
 func AddCat_Post(post_id int, cat_ID int) error {
@@ -53,7 +53,7 @@ func AddCat_Post(post_id int, cat_ID int) error {
 
 	query := "INSERT INTO post_category (post_id, category_id) VALUES (?, ?)"
 
-	return QueryAddUser(query, args)
+	return QueryAddToDB(query, args)
 }
 
 func AddNewComment(user_id int, post_id int, com_content string, com_TimeStamp time.Time) error {
@@ -62,7 +62,7 @@ func AddNewComment(user_id int, post_id int, com_content string, com_TimeStamp t
 
 	query := "INSERT INTO comments (user_id, post_id, content, created) VALUES (?, ?, ?, ?)"
 
-	return QueryAddUser(query, args)
+	return QueryAddToDB(query, args)
 }
 
 func UpdateNbLike(table string, type_id string, post_id int, column string, add int) error {
@@ -71,7 +71,7 @@ func UpdateNbLike(table string, type_id string, post_id int, column string, add 
 
 	query := fmt.Sprintf("UPDATE %s SET %s = %s + ? WHERE %s = ?", table, column, column, type_id)
 
-	return QueryAddUser(query, args)
+	return QueryAddToDB(query, args)
 }
 
 func UpdateStatusLike(table string, type_id string, id int, user_id int, status int) error {
@@ -92,11 +92,11 @@ func UpdateStatusLike(table string, type_id string, id int, user_id int, status 
 	if count == 0 {
 		args2 = append(args2, id, user_id, status)
 		query2 = "INSERT INTO " + table + " (" + type_id + ", user_id, type) VALUES (?, ?, ?)"
-		return QueryAddUser(query2, args2)
+		return QueryAddToDB(query2, args2)
 	} else {
 		args2 = append(args2, status, id, user_id)
 		query2 = "UPDATE " + table + " SET type = ? WHERE " + type_id + " = ? AND user_id = ?"
-		return QueryAddUser(query2, args2)
+		return QueryAddToDB(query2, args2)
 	}
 }
 
@@ -111,7 +111,7 @@ func AddGitHubUser(username string) (int, error) {
 
 	if err != nil {
 		query2 := "INSERT INTO users (username) VALUES ? "
-		err1 := QueryAddUser(query2, args)
+		err1 := QueryAddToDB(query2, args)
 		if err1 != nil {
 			return 0, err1
 		}
@@ -130,7 +130,7 @@ func AddGoogleUser(username string, email string) (int, error) {
 
 	if err != nil {
 		query2 := "INSERT INTO users (username, email) VALUES (?, ?)"
-		err1 := QueryAddUser(query2, args)
+		err1 := QueryAddToDB(query2, args)
 		if err1 != nil {
 			return 0, err1
 		}
@@ -145,5 +145,5 @@ func UpdatePostImagePathandType(imageType string, imageFilePath string, post_id 
 
 	query := "UPDATE posts SET img_type = ?, img_url = ? WHERE post_id = ?"
 
-	return QueryAddUser(query, args)
+	return QueryAddToDB(query, args)
 }

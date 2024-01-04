@@ -6,6 +6,8 @@ import (
 	"log"
 )
 
+//Fonction qui vient rajouter des données initiales pour éviter d'avoir un forum vide
+
 func PopulateDatabase() {
 	var db *sql.DB
 	var err error

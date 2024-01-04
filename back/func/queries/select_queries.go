@@ -27,7 +27,7 @@ func UpdateSessionsDB(ID int) (int, error) {
 
 	queryOne := "INSERT OR REPLACE INTO user_sessions (user_id) VALUES (?);"
 
-	err := QueryAddUser(queryOne, args)
+	err := QueryAddToDB(queryOne, args)
 	if err != nil {
 		return 0, err
 	}
