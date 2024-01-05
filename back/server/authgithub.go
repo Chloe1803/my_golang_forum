@@ -12,8 +12,8 @@ import (
 
 // Définir les constantes GitHub
 const (
-	githubClientID     = "1a3fdbb57dd1031f6a68"
-	githubClientSecret = "36c8a887c0b900fcf6f94a841a61438c5e292f64"
+	githubClientID     = ""
+	githubClientSecret = ""
 	githubRedirectURL  = "http://localhost:8080/GitCallBack"
 )
 
