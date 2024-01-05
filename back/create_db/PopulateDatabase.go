@@ -53,10 +53,9 @@ func PopulateDatabase() {
 
 	_, err = db.Exec(`
 			INSERT INTO posts (title, content, user_id) VALUES
-					('Problème de cochenilles', 'Bonjour, mes plantes d intérieur sont infestés de cochenilles, comment est-ce que je 
+					('Problème de cochenilles', 'Bonjour, mes plantes d intérieur sont infestées de cochenilles, comment est-ce que je 
 pourrais m en débarasser ?', 1),
-					('Conseils pour l entretien des roses', 'Je suis novice en jardinage, quelqu un a des conseils pour l entretien de
-s roses ?', 2),
+					('Conseils pour l entretien des roses', 'Je suis novice en jardinage, quelqu un a des conseils pour l entretien des roses ?', 2),
 					('Mon potager en permaculture', 'Je partage mon expérience de jardinage en permaculture dans mon potager.', 3),
 					('Les escargots mangent tous !', 'Je ne sais plus quoi faire, les escargots mangent tous mes plans au potager...',
 4),
@@ -73,7 +72,7 @@ ccuper...', 9),
 					('Légumes faciles', 'J aimerai faire un petit potager mais je n ai pas la main verte... Est-ce que vous pouvez me 
 recommander des legumes faciles à faire pousser ?', 10),
 					('C est quoi la permaculture ?', 'J en entend beaucoup parler mais c est quoi exactement la permaculture ?', 1),
-					('Les taupes foutent le bordel', 'Les taupes font plein de mottes de terre dans mon jardin, ça m énerve !!', 9),
+					('Les taupes font le bazar dans mon jardin', 'Les taupes font plein de mottes de terre dans mon jardin, ça m énerve !!', 9),
 					("Mes concombres ont un goût amer", "J ai mis un plan de concombres au potager mais ils sont immangeables, ils son
 t très amer. Est-ce que vous savez pourquoi ?", 2),
 					("Comment faire ses propres semis", "Jaimerai faire mes propres semis, comment faut-il si prendre ?", 6),
@@ -81,7 +80,6 @@ t très amer. Est-ce que vous savez pourquoi ?", 2),
 e dois-je l arroser ?", 9)
 	`)
 	if err != nil {
-		fmt.Println("Posts")
 		log.Fatal(err)
 	}
 
@@ -108,17 +106,13 @@ vérisations d eau occasionnelles'),
 			(11, 3, 'La permaculture est une approche de conception durable qui s inspire des écosystèmes naturels pour créer des syst
 èmes agricoles et de vie humaine harmonieux et durables.'),
 			(12, 1, 'As-tu essayer les pièges à taupes ?'),
-			(12, 2, 'Voyons Antoine, surveilles ton language !'),
-			(12, 9, 'TG Michel'),
-			(12, 2, 'Je vais signaler ton post, tu vas te faire ban'),
-			(12, 9, 'Ouh j ai peur'),
+			(12, 2, 'Ce sont en réalité de super allié au jardin !'),
 			(13, 4, 'C est sans doute un manque d eau, les concombres ont besoin d être arroser tous les jours'),
 			(14, 7, 'Cela dépend du légumes ou du fruit, il y a différentes méthodes'),
 			(15, 8, 'Jarrose les miens une fois tous les quinze jours entre mars et octobre, après je ne les arrose plus pendant l hiv
 er')
         `)
 	if err != nil {
-		fmt.Println("Commentaire")
 		log.Fatal(err)
 	}
 
@@ -136,7 +130,7 @@ er')
 		WHEN post_id = 9 THEN 2
 		WHEN post_id = 10 THEN 1
 		WHEN post_id = 11 THEN 1
-		WHEN post_id = 12 THEN 5
+		WHEN post_id = 12 THEN 2
 		WHEN post_id = 13 THEN 1
 		WHEN post_id = 14 THEN 1
 		WHEN post_id = 15 THEN 1
@@ -144,7 +138,6 @@ er')
     END
 `)
 	if err != nil {
-		fmt.Println("Comments")
 		log.Fatal(err)
 	}
 
@@ -160,7 +153,6 @@ er')
 			(15, 1)
 					`)
 	if err != nil {
-		fmt.Println("Categorie")
 		log.Fatal(err)
 	}
 

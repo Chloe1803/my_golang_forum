@@ -14,6 +14,7 @@
 The aim of this project was to build a web forum entirely in Go, with no JavaScript except for Bootstrap's accordion animation.
 Key features include user authentication, post/comment functionalities, and likes/dislikes, all backed by SQLite for data storage. The focus is on web basics, SQL, encryption, and database manipulation. No frontend frameworks were used.
 For personalization, I chose the theme of gardening for the forum, and the content is written in French.
+This was my first 'big' Go projected, done after 4 months of learning how to code.
 
 ## Installation
 
@@ -55,20 +56,31 @@ Open your browser and navigate to https://localhost:8080.
 
 ## Usage
 
+![Index page](img_readme/index.png)
+
 1. User Registration:
 
 Navigate to the registration page and provide a valid email, username, and password.
+
+![Register page](img_readme/register.png)
 
 2. User Login:
 
 Log in using your registered email and password.
 Ensure the login session is established.
 
+![Login page](img_readme/login.png)
+
 3. Create a Post:
 
 After logging in, navigate to the "Create Post" section.
+
+![Loged in index](img_readme/logedin_index.png)
+
 Write the content of your post and optionally associate it with one or more categories, or add an image.
 Submit the post.
+
+![Post editor](img_readme/post_editor.png)
 
 4. Add Comments:
 
@@ -76,14 +88,20 @@ View existing posts.
 Add comments to posts by navigating to the respective post's page.
 Submit your comment.
 
+![Adding comments](img_readme/comments.png)
+
 5. Like and Dislike Posts/Comments:
 
 As a registered user, interact with the like and dislike buttons on posts and comments.
 Observe the visible count of likes and dislikes.
 
+![Like/dislike](img_readme/like.png)
+
 6. Filtering Posts:
 
 Utilize the filtering mechanism to view posts based on categories, created posts, and liked posts.
+
+![filter](img_readme/filter.png)
 
 7. Logout:
 
