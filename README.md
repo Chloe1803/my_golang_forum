@@ -14,7 +14,7 @@
 The aim of this project was to build a web forum entirely in Go, with no JavaScript except for Bootstrap's accordion animation.
 Key features include user authentication, post/comment functionalities, and likes/dislikes, all backed by SQLite for data storage. The focus is on web basics, SQL, encryption, and database manipulation. No frontend frameworks were used.
 For personalization, I chose the theme of gardening for the forum, and the content is written in French.
-This was my first 'big' Go projected, done after 4 months of learning how to code.
+This was my first 'big' Go project, done after 4 months of learning how to code.
 
 ## Installation
 
